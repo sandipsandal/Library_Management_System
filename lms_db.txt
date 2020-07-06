@@ -1,0 +1,75 @@
+====================== CREATE DATABASE ==================
+CREATE DATABASE lms_db
+
+======================= Table's Name ==================
+
+======================= college_librarian ==================
+
+CREATE TABLE college_librarian (
+    l_id int  AUTO_INCREMENT,
+    L_name varchar(255),
+    l_contact BIGINT,
+    PRIMARY KEY (l_id)
+);
+
+INSERT INTO college_librarian (l_name,l_contact)
+values
+('Prakash shukla', 9835634579),
+('ananad mishra', 7856347383),
+('abhaya nath', 8987798733)
+
+ALTER TABLE college_librarian Add password varchar(30);
+ALTER TABLE college_librarian Add user_name varchar(30);
+
+// After Alter table... table columns names
+//(l_id,l_name,l_contact,password,user_name)
+
+SELECT * FROM college_librarian
+
+===================== library_user =====================
+
+CREATE TABLE library_user (
+    u_id int NOT NULL AUTO_INCREMENT,
+    u_name varchar(255) NOT NULL,
+    u_contact BIGINT UNIQUE,
+    u_fee INT,
+    PRIMARY KEY (u_id)
+);
+
+ALTER TABLE library_user add password varchar(30);
+ALTER TABLE library_user ADD user_name varchar(30) UNIQUE;
+
+//After Alter table... columns name
+//(u_id,u_name,u_contact,u_fee,password,user_name)
+
+// checking some operation....
+//#update user_name set u_fee = NULL where U_id = 3
+//UPDATE USER SET U_FEE = 20 WHERE U_ID=3;
+
+select * from library_user;
+
+===================== library_books =====================
+
+CREATE TABLE library_books (
+    b_id int NOT NULL AUTO_INCREMENT,
+    b_name varchar(255),
+    b_author varchar(255),
+    b_publication varchar(255),
+    b_rented_date date,
+    b_rented_user INT,
+    PRIMARY KEY (b_id),
+    FOREIGN KEY (b_rented_user) REFERENCES library_user(u_id)
+);
+
+INSERT INTO library_books(b_name,b_author,b_publication)
+VALUES
+("C Programming","Byron S Gottfried", "McGrow Hill"),
+("Programming Lang. Concept","Carlo Gheeze", "Wiley INDIA"),
+("Java Programming","Sebert Robert W", "PEARSON Education"),
+("C++ Programming","Ravichandran", "McGrow Hill");
+
+// Columns name
+(b_id,b_name,b_author,b_publication,b_rented_date,b_rented_user)
+
+
+SELECT * FROM library_books;
